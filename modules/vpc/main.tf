@@ -31,8 +31,8 @@ resource "aws_subnet" "public" {
 
   tags = {
     Name                                        = "${var.environment}-public-${data.aws_availability_zones.available.names[count.index]}"
-    "kubernetes.io/role/elb"                     = "1"
-    "kubernetes.io/cluster/${var.cluster_name}"  = "shared"
+    "kubernetes.io/role/elb"                    = "1"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 
@@ -45,8 +45,8 @@ resource "aws_subnet" "private" {
 
   tags = {
     Name                                        = "${var.environment}-private-${data.aws_availability_zones.available.names[count.index]}"
-    "kubernetes.io/role/internal-elb"            = "1"
-    "kubernetes.io/cluster/${var.cluster_name}"  = "shared"
+    "kubernetes.io/role/internal-elb"           = "1"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 
@@ -63,7 +63,7 @@ resource "aws_route_table" "public" {
   }
 }
 
- resource "aws_route_table_association" "public" {
+resource "aws_route_table_association" "public" {
   count = 3
 
   subnet_id      = aws_subnet.public[count.index].id

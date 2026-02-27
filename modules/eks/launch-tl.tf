@@ -59,8 +59,8 @@ EOF
   tag_specifications {
     resource_type = "instance"
     tags = {
-      Name        = "${var.environment}-${var.cluster_name}-worker"
-      Environment = var.environment
+      Name                                        = "${var.environment}-${var.cluster_name}-worker"
+      Environment                                 = var.environment
       "kubernetes.io/cluster/${var.cluster_name}" = "owned"
     }
   }
