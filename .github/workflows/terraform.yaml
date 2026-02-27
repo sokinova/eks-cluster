@@ -17,7 +17,7 @@ env:
 jobs:
   deploy-terraform:
     runs-on: ubuntu-22.04
-     # default settings to apply for all the steps
+    # default settings to apply for all the steps
     defaults:
       run:
         working-directory: ./root
@@ -26,8 +26,8 @@ jobs:
     environment: dev
 
     steps:
-      # equivalent of "git clone repo"
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
