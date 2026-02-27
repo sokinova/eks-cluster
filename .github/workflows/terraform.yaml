@@ -42,12 +42,12 @@ jobs:
       - name: Terraform Format Check
         run: terraform fmt -check 
 
-      - name: Terraform Plan
-        run: terraform plan -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
+      # - name: Terraform Plan
+      #   run: terraform plan -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
 
       # # Destroy all resources before merge into main branch
-      # - name: Terraform Destroy
-      #   run: terraform destroy -auto-approve -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
