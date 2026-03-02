@@ -17,6 +17,7 @@ module "eks" {
   vpc_id                  = module.vpc.vpc_id
   public_subnet_ids       = module.vpc.public_subnet_ids
   admin_role_arn          = var.admin_role_arn
+  admin_user_arns         = var.admin_user_arns
   github_runner_role_arns = var.github_runner_role_arns
 
   depends_on = [module.vpc]

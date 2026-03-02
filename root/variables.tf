@@ -38,6 +38,12 @@ variable "admin_role_arn" {
   type        = string
 }
 
+variable "admin_user_arns" {
+  description = "ARNs of IAM users for cluster admin access"
+  type        = list(string)
+  default     = []
+}
+
 variable "github_runner_role_arns" {
   description = "ARNs of GitHub Actions runner IAM roles"
   type        = list(string)
