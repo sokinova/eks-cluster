@@ -1,7 +1,0 @@
-# Terraform state backups / local debug exports
-state*.json
-state.backup.*
-*.tfstate
-*.tfstate.*
-.crash.log
-**/.terraform/
