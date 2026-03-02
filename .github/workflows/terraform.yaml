@@ -1,0 +1,53 @@
+name: "Terraform EKS Infrastructure"
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+
+permissions:
+  id-token: write    # Required for OIDC
+  contents: read     # Required for checkout
+
+env:
+  AWS_REGION: "us-east-1"
+  ENVIRONMENT_STAGE: "dev"
+
+jobs:
+  deploy-terraform:
+    runs-on: ubuntu-22.04
+    # default settings to apply for all the steps
+    defaults:
+      run:
+        working-directory: ./root
+        shell: bash
+
+    environment: dev
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.IAM_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format Check
+        run: terraform fmt -check 
+
+      - name: Terraform Plan
+        run: terraform plan -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
+
+      # # # Destroy all resources before merge into main branch
+      # - name: Terraform Destroy
+      #   run: terraform destroy -auto-approve -input=false -var-file=${ENVIRONMENT_STAGE}.tfvars
