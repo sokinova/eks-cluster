@@ -39,7 +39,3 @@ resource "aws_iam_role_policy" "grafana_secrets" {
     ]
   })
 }
-
-output "grafana_secrets_role_arn" {
-  value = aws_iam_role.grafana_secrets.arn
-}

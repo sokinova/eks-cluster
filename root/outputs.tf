@@ -17,3 +17,8 @@ output "cluster_name" {
 output "cluster_endpoint" {
   value = module.eks.cluster_endpoint
 }
+
+#Grafana IRSA outputs
+output "grafana_secrets_role_arn" {
+  value = aws_iam_role.grafana_secrets.arn
+}
