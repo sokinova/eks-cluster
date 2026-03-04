@@ -22,3 +22,22 @@ module "eks" {
 
   depends_on = [module.vpc]
 }
+
+# External DNS IRSA setup
+data "aws_route53_zone" "selected" {
+  for_each     = toset(var.hosted_zone_names)
+  name         = each.value
+  private_zone = false
+}
+
+module "external_dns" {
+  source = "../modules/external-dns"
+
+  environment          = var.environment
+  cluster_name         = var.cluster_name
+  hosted_zone_ids      = [for z in data.aws_route53_zone.selected : z.zone_id]
+  oidc_arn             = module.eks.oidc_provider_arn
+  oidc_url             = module.eks.oidc_provider_url
+  namespace            = var.external_dns_namespace
+  service_account_name = var.external_dns_sa_name
+}

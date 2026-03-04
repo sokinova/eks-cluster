@@ -49,3 +49,21 @@ variable "github_runner_role_arns" {
   type        = list(string)
   default     = []
 }
+
+#External DNS
+
+variable "external_dns_namespace" {
+  type = string
+}
+
+variable "hosted_zone_names" {
+  description = "List of Route53 hosted zone names for external-dns"
+  type        = list(string)
+  default     = []
+}
+
+variable "external_dns_sa_name" {
+  description = "Kubernetes service account name for external-dns"
+  type        = string
+  default     = "external-dns"
+}
