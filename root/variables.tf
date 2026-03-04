@@ -49,3 +49,13 @@ variable "github_runner_role_arns" {
   type        = list(string)
   default     = []
 }
+
+#External DNS
+
+variable "external_dns_namespace" {
+  type = string
+}
+
+variable "external_dns_sa_name" {
+  type = string
+}
