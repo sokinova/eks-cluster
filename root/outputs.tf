@@ -1,3 +1,4 @@
+# VPC Outputs
 output "vpc_id" {
   value = module.vpc.vpc_id
 }
@@ -10,6 +11,7 @@ output "private_subnet_ids" {
   value = module.vpc.private_subnet_ids
 }
 
+# EKS cluster Outputs
 output "cluster_name" {
   value = module.eks.cluster_name
 }
@@ -21,4 +23,8 @@ output "cluster_endpoint" {
 #Grafana IRSA outputs
 output "grafana_secrets_role_arn" {
   value = aws_iam_role.grafana_secrets.arn
+# External DNS Outputs
+
+output "external_dns_role_arn" {
+  value = module.external_dns.external_dns_role_arn
 }
