@@ -62,12 +62,6 @@ variable "hosted_zone_names" {
   default     = []
 }
 
-variable "external_dns_namespace" {
-  description = "Kubernetes namespace for external-dns"
-  type        = string
-  default     = "external-dns"
-}
-
 variable "external_dns_sa_name" {
   description = "Kubernetes service account name for external-dns"
   type        = string
