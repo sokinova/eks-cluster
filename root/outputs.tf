@@ -21,7 +21,7 @@ output "cluster_endpoint" {
 }
 
 # External DNS Outputs
+
 output "external_dns_role_arn" {
-  description = "ARN of the External-DNS IAM role for IRSA"
-  value       = aws_iam_role.external_dns.arn
+  value = module.external_dns.external_dns_role_arn
 }

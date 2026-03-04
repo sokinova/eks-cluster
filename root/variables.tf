@@ -56,6 +56,20 @@ variable "external_dns_namespace" {
   type = string
 }
 
+variable "hosted_zone_names" {
+  description = "List of Route53 hosted zone names for external-dns"
+  type        = list(string)
+  default     = []
+}
+
+variable "external_dns_namespace" {
+  description = "Kubernetes namespace for external-dns"
+  type        = string
+  default     = "external-dns"
+}
+
 variable "external_dns_sa_name" {
-  type = string
+  description = "Kubernetes service account name for external-dns"
+  type        = string
+  default     = "external-dns"
 }
