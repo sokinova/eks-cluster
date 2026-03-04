@@ -30,14 +30,14 @@ data "aws_route53_zone" "selected" {
   private_zone = false
 }
 
-module "external_dns_irsa" {
-  source = "../external-dns-irsa"
+module "external_dns" {
+  source = "../modules/external-dns"
 
   environment          = var.environment
   cluster_name         = var.cluster_name
   hosted_zone_ids      = [for z in data.aws_route53_zone.selected : z.zone_id]
-  oidc_arn             = module.eks-module.oidc_provider_arn
-  oidc_url             = module.eks-module.cluster_oidc_issuer
+  oidc_arn             = module.eks.oidc_provider_arn
+  oidc_url             = module.eks.oidc_provider_url
   namespace            = var.external_dns_namespace
   service_account_name = var.external_dns_sa_name
 }
